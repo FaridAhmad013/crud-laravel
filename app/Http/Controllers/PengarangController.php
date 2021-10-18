@@ -20,17 +20,18 @@ class PengarangController extends Controller
 
     public function store(Request $request)
     {
-        Pengarang::create([
-            'nama_pengarang' => $request->nama_pengarang,
-            'email' => $request->email,
-            'no_telp' => $request->no_telp
-        ]);
+        $pengarang = new Pengarang();
+        $pengarang->nama_pengarang = $request->nama_pengarang;
+        $pengarang->email = $request->email;
+        $pengarang->telp = $request->telp;
+        $pengarang->save();
 
-        return redirect('admin/');
+        return redirect()->route('pengarang.index');
     }
 
-    public function show(Pengarang $pengarang)
+    public function show($id)
     {
+        $pengarang = Pengarang::find($id);
         return view('admin.pengarangs.show', compact('pengarang'));
     }
 
@@ -41,15 +42,23 @@ class PengarangController extends Controller
     }
 
 
-    public function update(Request $request, Pengarang $pengarang)
+    public function update(Request $request, $id)
     {
-        $pengarang->update($request->all());
+        $pengarang = Pengarang::find($id);
+        $pengarang->nama_pengarang = $request->nama_pengarang;
+        $pengarang->email = $request->email;
+        $pengarang->telp = $request->telp;
+        $pengarang->save();
+
         return redirect()->route('pengarang.index');
+
     }
 
 
-    public function destroy(Pengarang $pengarang)
+    public function destroy($id)
     {
-        $pengarang->delete();
+        Pengarang::find($id)->delete();
+
+        return redirect()->route('pengarang.index');
     }
 }
