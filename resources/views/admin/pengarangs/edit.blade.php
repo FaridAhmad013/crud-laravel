@@ -20,16 +20,25 @@
                         <div class="mb-4">
                             <label for="nama_pengarang" class="form-label">Nama Pengarang</label>
                             <input type="text" name="nama_pengarang" id="nama_pengarang" class="form-control" value="{{ $pengarang->nama_pengarang }}">
+                            @error('nama_pengarang')
+                            {{ $message }}
+                            @enderror
                         </div>
 
                         <div class="mb-4">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" name="email" id="email" class="form-control" value="{{ $pengarang->email }}">
+                            @error('email')
+                            {{ $message }}
+                            @enderror
                         </div>
 
                         <div class="mb-4">
                             <label for="no_telp" class="form-label">No Telepon</label>
                             <input type="number" name="telp" id="no_telp" class="form-control" value="{{ $pengarang->telp }}">
+                            @error('telp')
+                            {{ $message }}
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-danger">Rubah</button>

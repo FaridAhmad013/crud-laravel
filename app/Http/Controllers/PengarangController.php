@@ -20,6 +20,13 @@ class PengarangController extends Controller
 
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nama_pengarang' => 'required',
+            'email' => 'required|unique:pengarangs, email',
+            'telp' => 'required|unique:pengarangs, telp'
+        ]);
+
         $pengarang = new Pengarang();
         $pengarang->nama_pengarang = $request->nama_pengarang;
         $pengarang->email = $request->email;
@@ -44,6 +51,12 @@ class PengarangController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama_pengarang' => 'required',
+            'email' => 'required|unique:pengarangs,email,' .$id,
+            'telp' => 'required|unique:pengarangs,telp,' .$id
+        ]);
+
         $pengarang = Pengarang::find($id);
         $pengarang->nama_pengarang = $request->nama_pengarang;
         $pengarang->email = $request->email;
